@@ -14,6 +14,10 @@ Thanks for sharing code!
   - numpy
   - python 2.7 for topic coherence evaluation
 
+# Build dataset
+1. Generate of your corpus a pickle dictionary with your vocabulary. Every word gets a unique number
+2. Generate a train.txt.npy data with your data. Every Vector is the text representation with the word number of vocab.pkl
+
 # How to use
 ```sh
 $ python pytorch_run.py --start

@@ -100,7 +100,7 @@ def make_data():
     global data_tr, data_te, tensor_tr, tensor_te, vocab, vocab_size, n_samples_tr
     global data_tr_index, data_tr_count, data_te_index, data_te_count, biterms
     dataset_tr = args.data_root + 'train.txt.npy'
-    data_tr = np.load(dataset_tr, encoding='bytes')
+    data_tr = np.load(dataset_tr, encoding='bytes', allow_pickle=True)
 
     vocab = args.data_root + 'vocab.pkl'
     vocab = pickle.load(open(vocab,'rb'))
@@ -244,6 +244,9 @@ if __name__=='__main__' and args.start:
     emb = torch.nn.functional.softmax(model.decoder.weight, 0).data.cpu().numpy().T
     print_top_words(emb, list(zip(*sorted(vocab.items(), key=lambda x:x[1])))[0])
     save_checkpoint(model, 'saved_models')
+
+if __name__ == '__main__':
+    make_data()
 
 
 
