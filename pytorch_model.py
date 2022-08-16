@@ -26,7 +26,7 @@ class ProdLDA(nn.Module):
 
         #self.en1_fc = nn.Linear(484, ac.en1_units) 
         
-        self.gcn1       = GraphConvolution(1995, 100)
+        self.gcn1       = GraphConvolution(ac.num_input, 100)
         self.gcn2       = GraphConvolution(100, 100)
         self.gcn3       = GraphConvolution(100, 1)
         self.en1_fc     = nn.Linear(ac.num_input, ac.en1_units)             # 1995 -> 100

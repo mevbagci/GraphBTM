@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--en1-units',        type=int,   default=100)
 parser.add_argument('-s', '--en2-units',        type=int,   default=100)
 parser.add_argument('-t', '--num-topic',        type=int,   default=50)
-parser.add_argument('-b', '--batch-size',       type=int,   default=100)
+parser.add_argument('-b', '--batch-size',       type=int,   default=5)
 parser.add_argument('-o', '--optimizer',        type=str,   default='Adam')
 parser.add_argument('-r', '--learning-rate',    type=float, default=0.002)
 parser.add_argument('-m', '--momentum',         type=float, default=0.99)
@@ -23,7 +23,8 @@ parser.add_argument('-q', '--init-mult',        type=float, default=1.0)    # mu
 parser.add_argument('-v', '--variance',         type=float, default=0.995)  # default variance in prior normal
 parser.add_argument('--start',                  action='store_true')        # start training at invocation
 parser.add_argument('--nogpu',                  action='store_true')        # do not use GPU acceleration
-parser.add_argument('-d', '--data-root', type=str, default='data/20news_clean/')
+# parser.add_argument('-d', '--data-root', type=str, default='data/20news_clean/')
+parser.add_argument('-d', '--data-root', type=str, default='/mnt/corpora2/projects/bagci/ACLTwitter/test/models/GraphBTM/MeTwo/data/')
 parser.add_argument('-a', '--betavariance',     type=float, default=0.04)
 
 args = parser.parse_args()
@@ -247,6 +248,12 @@ if __name__=='__main__' and args.start:
 
 if __name__ == '__main__':
     make_data()
+    make_model()
+    make_optimizer()
+    print(len(biterms))
+    dataset = bitermsDataset(np.array(biterms), args.num_input, mini_doc, data=None)
+    print('start training')
+    train(dataset)
 
 
 
